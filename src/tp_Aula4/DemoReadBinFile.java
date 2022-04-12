@@ -15,7 +15,6 @@ public class DemoReadBinFile {
         Scanner keyboard = new Scanner(System.in);
         int option = keyboard.nextInt();
 
-
         if (option == 1){
             ReadBinFile messyFileShell = new ReadBinFile("messyFile10.bin");
             ReadBinFile messyFileQuick = new ReadBinFile("messyFile10.bin");
@@ -34,9 +33,9 @@ public class DemoReadBinFile {
             }
         else if(option == 2){
 
-            ReadBinFile messyFileShell = new ReadBinFile("messyFile100.bin");
-            ReadBinFile messyFileQuick = new ReadBinFile("messyFile100.bin");
-            ReadBinFile messyFileBubble = new ReadBinFile("messyFile100.bin");
+            ReadBinFile messyFileShell = new ReadBinFile("teste100.bin");
+            ReadBinFile messyFileQuick = new ReadBinFile("teste100.bin");
+            ReadBinFile messyFileBubble = new ReadBinFile("teste100.bin");
 
 
             int [] orderShell = ShellSort.showAlgorithm(messyFileShell);
@@ -107,6 +106,19 @@ public class DemoReadBinFile {
 
             saveOrderFiles(orderQuick, orderShell, orderBubble,
                     "milionNumbers\\orderFileQuick1000000.bin", "milionNumbers\\orderFileShell1000000.bin", "milionNumbers\\orderFileBubble1000000.bin");
+        }
+        else if(option == 7){
+            ReadBinFile messyFileShell = new ReadBinFile("messyFileTenMilion.bin");
+            //ReadBinFile messyFileQuick = new ReadBinFile("messyFileTenMilion.bin");
+
+
+            int [] orderShell = ShellSort.showAlgorithm(messyFileShell);
+
+            //int [] orderQuick = QuickSort.showAlgorithm(messyFileQuick);
+
+
+//            saveOrderFiles(orderQuick, orderShell, orderBubble,
+  //                  "milionNumbers\\orderFileQuick1000000.bin", "milionNumbers\\orderFileShell1000000.bin", "milionNumbers\\orderFileBubble1000000.bin");
         }
 
         //System.out.println("\nReading the order file!");
