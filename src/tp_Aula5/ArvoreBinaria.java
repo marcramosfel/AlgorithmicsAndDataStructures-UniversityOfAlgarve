@@ -1,10 +1,12 @@
+package tp_Aula5;
+
 class NO {
     char info;
     NO dir;
     NO esq;
 
     NO(char a) {
-        // construtor da classe NO
+        // construtor da classe tp_Aula5.NO
         info = a;
         dir = null;
         esq = null;
