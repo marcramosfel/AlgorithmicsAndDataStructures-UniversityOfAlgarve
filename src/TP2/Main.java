@@ -1,35 +1,44 @@
 package TP2;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.LinkedList;
+import static TP2.FileClasses.CreateBinFileData.createBinFile;
+import static TP2.FileClasses.ReadBinFileData.readBinFile;
+import TP2.MyList.MyLinkedList;
 
-import static TP2.ReadBinFile.readBinFile;
-
-public class Main {
-
-    public static LocalDate convertStringLocalDate(String data){
-        return LocalDate.parse(data, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-    }
+public class Main implements GlobalVariables {
 
     public static void main(String[] args) {
-        //createBinFile("Dados.txt");
-        String dados = readBinFile("Dados.bin");
+        //TRANSFORMA O FICHEIRO TXT PARA BINARIO
+        createBinFile(GlobalVariables.nameTxtFile);
 
-        String[] array;
-        array = dados.split("\n");
+        //myListOfPersons É A LISTA QUE É RETORNADA PELO METODO READBINFILE, ESTE METODO LE E ADICIONA AUTOMATICAMENETE A LISTA
+        MyLinkedList<Person> myListOfPersons = readBinFile(GlobalVariables.nameBinFile);
 
-        LinkedList<Person> myListOfPersons = new LinkedList<>();
+        //PERMITE A INTRODUÇÃO DE NOVOS ELEMENTOS
+        myListOfPersons.add(new Person("Marcos Ramos", 1999,12,15, 262834251));
+        myListOfPersons.add(new Person("Luis Castro", 1989, 8, 31, 917812128));
+        myListOfPersons.add(new Person("Mariana Goncalvez", 1972, 12, 17, 928719271));
 
-        for (int i = 0; i < array.length; i++){
-            myListOfPersons.add(new Person(array[i++], convertStringLocalDate(array[i++]), Integer.parseInt(array[i])));
-        }
+        //PERMITE A VISUALIZACAO DOS ELEMENTOS DA LISTA
+        System.out.println("\n++++++++++++ LISTA DE PESSOAS ++++++++++++ ");
+        myListOfPersons.show();
 
-        myListOfPersons.add(new Person("Marcos Ramos", LocalDate.parse("15/12/1999", DateTimeFormatter.ofPattern("dd/MM/yyyy")), 262834251));
+        System.out.println();
 
-        for(Person p : myListOfPersons){
-            System.out.println("\n#######################");
-            System.out.println("Name: " + p.getName() + "\nBirthday: " + p.getBirthday() + "\nCC: " +  p.getCc() + "\nAge: " + p.getAge() + "\nGender: " + p.getGender());
-        }
+        //SEPARA POR IDADE E GRAVA EM FICHEIROS RESPETIVOS
+        System.out.println("\n++++++++++++ SEPARANDO LISTA POR IDADE ++++++++++++  \n....");
+        SeparateLists.ByAge(myListOfPersons);
+        System.out.println("\n++++++++++++ OVER 18 ++++++++++++ ");
+        SeparateLists.getPersonsOver18();
+        System.out.println("\n++++++++++++ UNDER 18 ++++++++++++");
+        SeparateLists.getPersonUnder18();
+
+        //SEPARA POR GENERO E GRAVA EM FICHEIROS RESPETIVOS
+        System.out.println("\n++++++++++++ SEPARANDO LISTA POR GENERO ++++++++++++  \n....");
+        SeparateLists.ByGender(myListOfPersons);
+        System.out.println("\n++++++++++++ MALE ++++++++++++ ");
+        SeparateLists.malePersons();
+        System.out.println("\n++++++++++++ FEMALE ++++++++++++ ");
+        SeparateLists.femalePersons();
+
     }
 }
